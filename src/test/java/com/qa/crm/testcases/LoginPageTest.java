@@ -9,56 +9,40 @@ import com.qa.crm.base.TestBase;
 import com.qa.crm.pages.HomePage;
 import com.qa.crm.pages.LoginPage;
 
-public class LoginPageTest extends TestBase{
-	
+public class LoginPageTest extends TestBase {
 	LoginPage loginPage;
 	HomePage homePage;
-	
-	public LoginPageTest()
-	{
+
+	public LoginPageTest() {
 		super();
 	}
 
-	
 	@BeforeMethod
-	public void setUp()
-	{
-		initateBrowser();
-		 loginPage = new LoginPage();
+	public void setUp() {
+		initialization();
+		loginPage = new LoginPage();
 	}
-	
-	@Test(priority=1)
-	public void loginPageTitleTest()
-	{
+
+	@Test(priority = 1)
+	public void loginPageTitleTest() {
 		String title = loginPage.validateLoginPageTitle();
 		Assert.assertEquals(title, "CRMPRO - CRM software for customer relationship management, sales, and support.");
 	}
-	
-	@Test(priority=2)
-	public void crmLogoImgTest()
-	{
-		boolean logo = loginPage.validateCRMImage();
-		Assert.assertTrue(logo);
+
+	@Test(priority = 2)
+	public void crmLogoImageTest() {
+		boolean flag = loginPage.validateCRMImage();
+		Assert.assertTrue(flag);
 	}
-	
-	
-	@Test(priority=3)
-	public void loginTest() throws InterruptedException
-	{
-		
-		try {
-			homePage = loginPage.login(prop.getProperty("userName"), prop.getProperty("password"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+	@Test(priority = 3)
+	public void loginTest() {
+		homePage = loginPage.login(prop.getProperty("userName"), prop.getProperty("password"));
 	}
-	
-	
+
 	@AfterMethod
-	public void tearDown()
-	{
+	public void tearDown() {
 		driver.quit();
 	}
-	
+
 }
